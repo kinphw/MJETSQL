@@ -1,3 +1,8 @@
 data
 .vscode
 logs
+xvba_modules
+
+test.sql
+
+legacy
