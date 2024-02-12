@@ -5,12 +5,15 @@
 
 -- 변수선언부 -- 여기서 회사 컬럼명을 매핑해주고, 기존 쿼리 활용함
 ;
-SET @cAmtec = 'Loc.curr.amount';
-SET @cGl = 'G/L';
-SET @cJno = 'DocumentNo';
+SET @cAmtec = 'DMBTR';
+-- 현지통화금액
+SET @cGl = 'HKONT';
+--계정코드
+SET @cJno = 'BELNR';
+--전표번호
 
-SET @tName = 'hs';
-
+SET @tName = 'sy2312';
+-- 테이블명
 
 -- 1. Records Check : 
 
@@ -30,6 +33,8 @@ SELECT SUM(`',@cAmtec,'`)
 FROM ',@tName,';
 ');
 
+SELECT @s;
+-- for mysql workbench
 
 PREPARE q1 FROM @s;
 EXECUTE q1;
@@ -46,14 +51,14 @@ FROM
 GROUP BY A.`',@cGl,'`;
 ');
 
-SELECT @s;
+
+SELECT @s; 
+-- FOR MYSQL Workbench
+
 PREPARE q1 FROM @s;
 EXECUTE q1;
 DEALLOCATE PREPARE q1;
 
--- index 설정
-
-CREATE INDEX id1 ON frl.frl_new (`DocumentNo`, `Loc.curr.amount`); -- 전표번호로 인덱스 설정
 
 -- 9. 전표번호 별로 차대변금액이 일치하는지 확인
 
